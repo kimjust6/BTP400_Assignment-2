@@ -42,6 +42,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>uk.oczadly.karl</groupId>
+		    <artifactId>jnano</artifactId>
+		    <version>LATEST</version>
+		</dependency>
 	</dependencies>
 
 	<build>
