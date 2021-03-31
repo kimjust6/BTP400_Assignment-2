@@ -83,14 +83,14 @@ public class Bank {
 				rpc, // Kalium RPC
 				blockProducer); // Using our BlockProducer defined above
 		
-		account.receiveAll();
-		return new Account(accountNo, account.getAccount().toAddress(), account.getBalance().getAsNano().doubleValue()*BAN_NAN_MULT);
+		//account.receiveAll();
+
+		return new Account(accountNo, account);
 	}
 	double viewAccount(int accountNo) {
 		double theBalance = -1;
 		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-		//HexData privateKey = WalletUtil.deriveKeyFromSeed("7FF183B5D24A85BA5B1AFFEDA99A6CF0AAB640BAF06C901A9242323336F36E6", accountNo);
-
+		
 		// Create account from private key
 		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
 				rpc, // Kalium RPC

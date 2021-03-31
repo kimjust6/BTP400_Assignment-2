@@ -1,19 +1,21 @@
 package bankingV20_0;
 
+import uk.oczadly.karl.jnano.rpc.util.wallet.LocalRpcWalletAccount;
+import uk.oczadly.karl.jnano.rpc.util.wallet.WalletActionException;
+import bankingV20_0.Bank;
+
 public class Account {
-	int accountNo;
-	double balance;
-	String pubAddress;
+	private int accountNo;
+	private LocalRpcWalletAccount wallet;
+	
 	Account(){
 		accountNo = -1;
-		balance = 0;
-		pubAddress = "";
+		wallet = null;
 	}
 	
-	public Account(int accountNo, String pubAddress, double balance) {
+	public Account(int accountNo, LocalRpcWalletAccount wallet) {
 		this.accountNo = accountNo;
-		this.balance = balance;
-		this.pubAddress = pubAddress;
+		this.wallet = wallet;
 	}
 	
 	public int getAccountNo() {
@@ -22,18 +24,30 @@ public class Account {
 	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
 	}
+	
+	//return new Account(accountNo, account.getAccount().toAddress(), account.getBalance().getAsNano().doubleValue()*BAN_NAN_MULT);
 	public double getBalance() {
+		double balance = 0;
+		try {
+			balance = this.wallet.getBalance().getAsNano().doubleValue()*Bank.BAN_NAN_MULT;
+		} catch (WalletActionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return balance;
 	}
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
+
 	public String getPubAddress() {
-		return pubAddress;
+		try {
+			this.wallet.receiveAll();
+		} catch (WalletActionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return this.wallet.getAccount().toAddress();
 	}
-	public void setPubAddress(String pubAddress) {
-		this.pubAddress = pubAddress;
-	}
+
 
 	
 }

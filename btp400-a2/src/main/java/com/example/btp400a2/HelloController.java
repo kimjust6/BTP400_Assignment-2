@@ -62,6 +62,7 @@ public class HelloController {
 		
 		
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(anAccount.getPubAddress(),250,250);
+		//imageBase64 = QRCodeGenerator.generateQRCodeImage("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D",250,250);
 		return String.format("<div>Public Address: <a href=%s target=_blank>%s</a></div>", "https://creeper.banano.cc/explorer/account/"+ anAccount.getPubAddress(), anAccount.getPubAddress()) +
 				String.format("<div>Account Number: %s</div>", anAccount.getAccountNo()) +
 				String.format("<div>Balance: %s</div>", anAccount.getBalance()) +
