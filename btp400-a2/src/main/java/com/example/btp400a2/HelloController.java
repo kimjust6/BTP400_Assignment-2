@@ -1,12 +1,24 @@
 package com.example.btp400a2;
 
+ 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Base64;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+
+import QRCode.QRCodeGenerator;
+import bankingV20_0.Account;
+import bankingV20_0.Bank;
+
 
 @RestController
 public class HelloController {
@@ -15,6 +27,12 @@ public class HelloController {
 	public String index() {
 		return query();
 	}
+	
+	@RequestMapping("/qrcode")
+	public String qrcode() throws Exception {
+		return getQRCode();
+	}
+
 
 	public String query() {
 		String str = "error";
@@ -36,4 +54,19 @@ public class HelloController {
 		
 		return str;
 	}
+	
+	public String getQRCode() throws Exception
+	{
+		Bank aBank = new Bank();
+		Account anAccount = aBank.getAccount(0);
+		
+		
+		String imageBase64 = QRCodeGenerator.generateQRCodeImage(anAccount.getPubAddress(),250,250);
+		return String.format("<div>Public Address: <a href=%s target=_blank>%s</a></div>", "https://creeper.banano.cc/explorer/account/"+ anAccount.getPubAddress(), anAccount.getPubAddress()) +
+				String.format("<div>Account Number: %s</div>", anAccount.getAccountNo()) +
+				String.format("<div>Balance: %s</div>", anAccount.getBalance()) +
+				String.format("<img src=\"%s\"></img>", "data:image/png;base64," + imageBase64);
+
+	}
+	
 }

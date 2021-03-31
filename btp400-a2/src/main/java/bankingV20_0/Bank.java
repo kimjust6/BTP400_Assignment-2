@@ -17,7 +17,7 @@ import uk.oczadly.karl.jnano.util.blockproducer.StateBlockProducer;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator.OpenCLInitializerException;
 
-public class Banking {
+public class Bank {
 
 	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
 	static final double BAN_NAN_MULT = 10;
@@ -28,7 +28,7 @@ public class Banking {
 	final String prefix = "ban";
 	BlockProducer blockProducer;
 
-	Banking() {
+	public Bank() {
 		try {
 			blockProducer = new StateBlockProducer(
 					BlockProducerSpecification.builder().defaultRepresentative(rep)
@@ -76,10 +76,20 @@ public class Banking {
 		System.out.printf("Send block hash: %s%n", hash);
 		return false;
 	}
-
+	public Account getAccount(int accountNo) throws WalletActionException
+	{
+		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
+		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
+				rpc, // Kalium RPC
+				blockProducer); // Using our BlockProducer defined above
+		
+		account.receiveAll();
+		return new Account(accountNo, account.getAccount().toAddress(), account.getBalance().getAsNano().doubleValue()*BAN_NAN_MULT);
+	}
 	double viewAccount(int accountNo) {
 		double theBalance = -1;
 		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
+		//HexData privateKey = WalletUtil.deriveKeyFromSeed("7FF183B5D24A85BA5B1AFFEDA99A6CF0AAB640BAF06C901A9242323336F36E6", accountNo);
 
 		// Create account from private key
 		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
@@ -112,7 +122,7 @@ public class Banking {
 
 	public static void main(String args[]) throws WalletActionException, OpenCLInitializerException {
 		//System.out.println("Nice");
-		Banking b = new Banking();
+		Bank b = new Bank();
 		b.viewAccount(1);
 		//b.send(1, 0, 3);
 	
