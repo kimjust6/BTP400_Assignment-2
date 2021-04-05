@@ -25,10 +25,12 @@ public class QRCodeGenerator {
 
 	public static BitMatrix generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
+		//create a qrCodeWriter object
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        //create a bitmatrix image with the text
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
         
-        
+
         Path path = FileSystems.getDefault().getPath(filePath);
         
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
@@ -37,12 +39,18 @@ public class QRCodeGenerator {
        
     }
 	
+	/**
+	 * @param args
+	 */
 	public static String generateQRCodeImage(String barcodeText, int height, int width) throws Exception {
 	    QRCodeWriter barcodeWriter = new QRCodeWriter();
-	    BitMatrix bitMatrix = 
-	      barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, height, width);
+	    //create a BitMatrix image with the text
+	    BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, height, width);
+	    //create a ByteArrayOutputStream object
 	    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+	    //create a bit array image
 	    MatrixToImageWriter.writeToStream(bitMatrix, "png", byteArrayOutputStream);
+	    //convert the bit array into a base64String
 	    return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
 	}
 	    
@@ -54,16 +62,16 @@ public class QRCodeGenerator {
 	 */
 	public static void main(String args[])
 	{
-//		System.out.println("test");
-//		try {
-//			generateQRCodeImage("Nice",250,250,"D:\\imagse.png");
-//		} catch (WriterException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		System.out.println("test");
+		try {
+			generateQRCodeImage("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D",250,250,"D:\\image.png");
+		} catch (WriterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
