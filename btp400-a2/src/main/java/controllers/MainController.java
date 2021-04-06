@@ -1,17 +1,13 @@
-package com.example.btp400a2;
+package controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import QRCode.QRCodeGenerator;
-import bankingV20_0.Account;
-import bankingV20_0.Bank;
+import classes.Account;
+import classes.Bank;
 
 @Controller
 public class MainController {
@@ -21,14 +17,14 @@ public class MainController {
 		model.addAttribute("group", "Group 4");
 		return "home";
 	}
-	
+
 	@GetMapping(path = "/wallet/{walletID}")
 	public String walletInfo(Model model, @PathVariable String walletID) throws Exception {
 		Bank aBank = new Bank();
 		Account anAccount = aBank.getAccount(Integer.parseInt(walletID));
 
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(anAccount.getPubAddress(), 250, 250);
-		
+
 		// can be made into an attribute collection
 		model.addAttribute("publicAddr", anAccount.getPubAddress());
 		model.addAttribute("accNo", anAccount.getAccountNo());
@@ -37,8 +33,6 @@ public class MainController {
 
 		return "wallet";
 	}
-	
-	
 
 	// this one isnt set up -------------------------------
 

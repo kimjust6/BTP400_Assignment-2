@@ -1,4 +1,4 @@
-package bankingV20_0;
+package classes;
 
 import java.net.MalformedURLException;
 import java.net.URL;

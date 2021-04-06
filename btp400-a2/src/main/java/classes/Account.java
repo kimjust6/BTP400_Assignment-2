@@ -1,8 +1,8 @@
-package bankingV20_0;
+package classes;
 
+import classes.Bank;
 import uk.oczadly.karl.jnano.rpc.util.wallet.LocalRpcWalletAccount;
 import uk.oczadly.karl.jnano.rpc.util.wallet.WalletActionException;
-import bankingV20_0.Bank;
 
 public class Account {
 	private int accountNo;

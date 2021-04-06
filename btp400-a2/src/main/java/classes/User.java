@@ -1,4 +1,4 @@
-package com.example.btp400a2;
+package classes;
 
 public class User {
 	private String balance;
