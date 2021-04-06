@@ -7,34 +7,36 @@ import bankingV20_0.Bank;
 public class Account {
 	private int accountNo;
 	private LocalRpcWalletAccount wallet;
-	
-	Account(){
+
+	Account() {
 		accountNo = -1;
 		wallet = null;
 	}
-	
+
 	public Account(int accountNo, LocalRpcWalletAccount wallet) {
 		this.accountNo = accountNo;
 		this.wallet = wallet;
 	}
-	
+
 	public int getAccountNo() {
 		return accountNo;
 	}
+
 	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
 	}
-	
-	//return new Account(accountNo, account.getAccount().toAddress(), account.getBalance().getAsNano().doubleValue()*BAN_NAN_MULT);
+
+	// return new Account(accountNo, account.getAccount().toAddress(),
+	// account.getBalance().getAsNano().doubleValue()*BAN_NAN_MULT);
 	public double getBalance() {
 		double balance = 0;
 		try {
-			balance = this.wallet.getBalance().getAsNano().doubleValue()*Bank.BAN_NAN_MULT;
+			balance = this.wallet.getBalance().getAsNano().doubleValue() * Bank.BAN_NAN_MULT;
 		} catch (WalletActionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return balance;
 	}
 
@@ -48,6 +50,4 @@ public class Account {
 		return this.wallet.getAccount().toAddress();
 	}
 
-
-	
 }

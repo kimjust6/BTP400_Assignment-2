@@ -29,7 +29,7 @@ public class Bank {
 	BlockProducer blockProducer;
 
 	double theBalance = -1;
-	
+
 	public Bank() {
 		try {
 			blockProducer = new StateBlockProducer(BlockProducerSpecification.builder().defaultRepresentative(rep)
@@ -98,16 +98,16 @@ public class Bank {
 		System.out.printf("Using account address %s%n", account.getAccount());
 		new Thread(() -> {
 			try {
-				while(true) {
-					
+				while (true) {
+
 //						System.out.printf("Received %,d blocks%n");
-					if(account.receiveAll().size() > 0) {
+					if (account.receiveAll().size() > 0) {
 						theBalance = account.getBalance().getAsNano().doubleValue() * BAN_NAN_MULT;
 						System.out.printf("Balance: %s%n", theBalance);
 					}
 					Thread.sleep(5000);
 				}
-				
+
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -115,7 +115,7 @@ public class Bank {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}).start();
 
 		return theBalance;
