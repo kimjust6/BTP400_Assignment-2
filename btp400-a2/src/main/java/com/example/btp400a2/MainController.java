@@ -2,8 +2,12 @@ package com.example.btp400a2;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import QRCode.QRCodeGenerator;
 import bankingV20_0.Account;
@@ -17,7 +21,7 @@ public class MainController {
 		model.addAttribute("group", "Group 4");
 		return "home";
 	}
-
+	
 	@GetMapping(path = "/wallet/{walletID}")
 	public String walletInfo(Model model, @PathVariable String walletID) throws Exception {
 		Bank aBank = new Bank();
