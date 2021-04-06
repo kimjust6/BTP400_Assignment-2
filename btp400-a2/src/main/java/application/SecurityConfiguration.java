@@ -24,21 +24,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	// this doesnt encode, should replace with something proper
+
 	@SuppressWarnings("deprecation")
 	@Bean
 	public static NoOpPasswordEncoder passwordEncoder() {
 		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
 	}
 
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").hasAnyAuthority("USER").anyRequest().authenticated().and()
-				.formLogin().permitAll().and().logout().permitAll();
+		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/wallet").hasAnyAuthority("USER").anyRequest()
+				.authenticated().and().formLogin().permitAll().and().logout().permitAll().logoutSuccessUrl("/");
 
 	}
 
