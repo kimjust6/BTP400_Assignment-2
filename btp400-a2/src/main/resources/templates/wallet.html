@@ -8,6 +8,9 @@
 <title>Wallet</title>
 </head>
 <body>
-    <h2>Hello World from BTP400 A2</h2>
+    <div>Public Address: <a th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}" th:text="${publicAddr}" target=_blank></a></div>
+    <div>Account Number: <span th:text="${accNo}"></span></div>
+    <div>Balance: <span th:text="${balAmt}"></span></div>
+    <img th:src="${qrImg}" ></img>
 </body>
 </html>
