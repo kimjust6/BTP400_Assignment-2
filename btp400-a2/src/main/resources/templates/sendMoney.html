@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:form="http://www.springframework.org/tags/form">
+<head>
+<meta charset="UTF-8">
+<title>Wallet</title>
+</head>
+<body>
+	<a href="wallet">Return</a>
+	<h2>Send Money</h2>
+	Balance: <span th:text="${balAmt}"></span>
+	<br><br>
+	<form name="sentMoney" th:action="@{/sentMoney}" method="post">
+		<label>Send To: </label> <input type='text' name='sendTo'
+			th:value="${sendTo}" /> <br> <label>Amount: </label> <input
+			type='text' name='amount' th:value="${amount}" /> <br> <br>
+		<input type="submit" value="Send" class="btn">
+	</form>
+</body>
+</html>
