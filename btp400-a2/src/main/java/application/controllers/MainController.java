@@ -37,7 +37,7 @@ public class MainController {
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		if (accountNo == -1) {
+		//if (accountNo == -1) {
 
 			String username;
 
@@ -56,14 +56,17 @@ public class MainController {
 				ResultSet queryResult = statement.executeQuery(query);
 
 				if (queryResult.next())
+				{
 					accountNo = queryResult.getInt("accno");
+				}
+					
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		//}
 
 		bank.updateBalance(accountNo);
 
