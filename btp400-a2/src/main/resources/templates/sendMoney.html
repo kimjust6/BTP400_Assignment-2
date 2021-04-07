@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
+<link th:href="@{/signin.css}" rel="stylesheet" />
 </head>
 <body>
 	<a href="wallet">Return</a>
@@ -15,9 +16,9 @@
 	<br><br>
 	<form name="sentMoney" th:action="@{/sentMoney}" method="post">
 		<label>Send To: </label> <input type='text' name='sendTo'
-			th:value="${sendTo}" /> <br> <label>Amount: </label> <input
-			type='text' name='amount' th:value="${amount}" /> <br> <br>
-		<input type="submit" value="Send" class="btn">
+			th:value="${sendTo}" id="field"/> <br> <label>Amount: </label> <input
+			type='text' name='amount' th:value="${amount}" id="field"/> <br> <br>
+		<input type="submit" value="Send" class="btn" id="btn">
 	</form>
 </body>
 </html>
