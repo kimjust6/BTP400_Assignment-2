@@ -68,6 +68,7 @@ public class MainController {
 		bank.updateBalance(accountNo);
 		
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(this.bank.getPubAddress(accountNo), 250, 250);
+
 		model.addAttribute("publicAddr", this.bank.getPubAddress(accountNo));
 		model.addAttribute("accNo", accountNo);
 		model.addAttribute("balAmt", this.bank.getBalance(accountNo));
@@ -93,7 +94,7 @@ public class MainController {
 	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount, RedirectAttributes redirAttrs) {
 
 		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
-		bank.send(accountNo, sendTo, amount);
+//		bank.send(accountNo, sendTo, amount);
 		
 		return "redirect:/wallet";
 	}
