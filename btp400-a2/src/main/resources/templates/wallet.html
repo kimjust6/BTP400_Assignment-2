@@ -10,7 +10,8 @@
 </head>
 <body>
 	<a href="logout">Logout</a>
-	<br><br>
+	<br>
+	<br>
 	<div>
 		Public Address: <a
 			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}"
@@ -23,24 +24,8 @@
 		Balance: <span th:text="${balAmt}"></span>
 	</div>
 	<img th:src="${qrImg}"></img>
-	
-	<br/>
-	<div>
-	<h2>Send Money</h2>
-		<form action="/sendMoney" method="post">
-		<table>
-			<tr>
-				<td>Amount: <input type="text" name="amount" /></td>
-			</tr>
-			<tr>
-				<td>Client Account: <input type="text" name="accno" /></td>
-			</tr>
 
-			<tr>
-				<td><form:input type="submit" value="Send" /></td>
-			</tr>
-			</table>
-		</form>
-	</div>
+	<br />
+	<a href="sendMoney">Send Money</a>
 </body>
 </html>
