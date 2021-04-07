@@ -28,6 +28,7 @@ public class MainController {
 	@GetMapping("/")
 	public String homePage(Model model) {
 		model.addAttribute("group", "Group 4");
+		accountNo = -1;
 		return "home";
 	}
 
@@ -37,7 +38,7 @@ public class MainController {
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		//if (accountNo == -1) {
+		if (accountNo == -1) {
 
 			String username;
 
@@ -66,10 +67,10 @@ public class MainController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		//}
+		}
 
 		bank.updateBalance(accountNo);
-
+		this.bank.getPubAddress(accountNo);
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(this.bank.getPubAddress(accountNo), 250, 250);
 
 		model.addAttribute("publicAddr", this.bank.getPubAddress(accountNo));
