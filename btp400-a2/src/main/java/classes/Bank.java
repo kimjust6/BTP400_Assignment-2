@@ -28,7 +28,6 @@ public class Bank {
 	BlockProducer blockProducer;
 
 	double theBalance = -1;
-	
 
 	public Bank() {
 		try {
@@ -37,9 +36,9 @@ public class Bank {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			
+
 			blockProducer = new StateBlockProducer(BlockProducerSpecification.builder().defaultRepresentative(rep)
 					.workGenerator(new OpenCLWorkGenerator()) // Local work on gpu
 //					.workGenerator(new NodeWorkGenerator(rpc))
@@ -48,7 +47,6 @@ public class Bank {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -79,16 +77,16 @@ public class Bank {
 		return false;
 	}
 
-	public Account getAccount(int accountNo) throws WalletActionException {
-		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
-				rpc, // Kalium RPC
-				blockProducer); // Using our BlockProducer defined above
-
-		// account.receiveAll();
-
-		return new Account(accountNo, account);
-	}
+//	public Account getAccount(int accountNo) throws WalletActionException {
+//		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
+//		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
+//				rpc, // Kalium RPC
+//				blockProducer); // Using our BlockProducer defined above
+//
+//		// account.receiveAll();
+//
+//		return new Account(accountNo, account);
+//	}
 
 	public void updateBalance(int accountNo) {
 		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
