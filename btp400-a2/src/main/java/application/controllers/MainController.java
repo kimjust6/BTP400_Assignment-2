@@ -38,7 +38,7 @@ public class MainController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if (accountNo == -1) {
-			
+
 			String username;
 
 			if (principal instanceof UserDetails) {
@@ -66,7 +66,7 @@ public class MainController {
 		}
 
 		bank.updateBalance(accountNo);
-		
+
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(this.bank.getPubAddress(accountNo), 250, 250);
 
 		model.addAttribute("publicAddr", this.bank.getPubAddress(accountNo));
@@ -76,26 +76,27 @@ public class MainController {
 
 		return "wallet";
 	}
-	
+
 	@RequestMapping(value = "/reloadBalance", method = RequestMethod.GET)
 	public String sendMoney() {
 		return "redirect:/wallet";
 	}
-	
+
 	@RequestMapping(value = "/sendMoney", method = RequestMethod.GET)
 	public String sendMoney(Model model) {
-		
+
 		model.addAttribute("balAmt", this.bank.getBalance(accountNo));
-		
+
 		return "sendMoney";
 	}
 
 	@RequestMapping(value = "/sentMoney", method = RequestMethod.POST)
-	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount, RedirectAttributes redirAttrs) {
+	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount,
+			RedirectAttributes redirAttrs) {
 
 		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
-//		bank.send(accountNo, sendTo, amount);
-		
+		bank.send(accountNo, sendTo, amount);
+
 		return "redirect:/wallet";
 	}
 

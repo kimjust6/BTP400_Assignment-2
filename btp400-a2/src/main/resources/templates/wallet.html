@@ -38,8 +38,7 @@ img {
 	<tr>
 		<td>Public Address:</td>
 		<td><a
-			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}"
-			th:text="${publicAddr}" target=_blank></a></td>
+			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}" th:text="${publicAddr}" target=_blank></a></td>
 	</tr>
 	<tr>
 		<td>Account Number:</td>
@@ -50,9 +49,11 @@ img {
 		<td><span th:text="${balAmt}"></span></td>
 	</tr>
 	</table> 
+
 	<img th:src="${qrImg}"></img>
 	<br />
-	
+	<br />
+	<br />
 	<a href="sendMoney"><button id="btn0"> Send Money</button></a> 
 	<a href="reloadBalance"><button id="btn1">Refresh</button></a>
 </body>
