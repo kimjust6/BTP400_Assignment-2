@@ -7,26 +7,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
+<style>
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  display:inline;
+}
+
+td, th {
+  border: 2px solid black;
+  text-align: left;
+  padding: 14px;
+  font-size: 14pt;
+}
+
+img {
+	width: 180px;
+}
+
+</style>
 <link th:href="@{/signin.css}" rel="stylesheet" />
 </head>
 <body>
-	<a href="logout">Logout</a>
+	<a href="logout"><button id="btn1">Logout</button></a>
 	<br>
 	<br>
-	<div>
-		Public Address: <a
+	
+	<table>
+	<tr>
+		<td>Public Address:</td>
+		<td><a
 			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}"
-			th:text="${publicAddr}" target=_blank></a>
-	</div>
-	<div>
-		Account Number: <span th:text="${accNo}"></span>
-	</div>
-	<div>
-		Balance: <span th:text="${balAmt}"></span>&nbsp;&nbsp;<a href="reloadBalance">Refresh</a>
-	</div>
+			th:text="${publicAddr}" target=_blank></a></td>
+	</tr>
+	<tr>
+		<td>Account Number:</td>
+		<td><span th:text="${accNo}"></span></td>
+	</tr>
+	<tr>
+		<td>Balance:</td>
+		<td><span th:text="${balAmt}"></span></td>
+	</tr>
+	</table> 
 	<img th:src="${qrImg}"></img>
-
 	<br />
-	<a href="sendMoney">Send Money</a>
+	
+	<a href="sendMoney"><button id="btn0"> Send Money</button></a> 
+	<a href="reloadBalance"><button id="btn1">Refresh</button></a>
 </body>
 </html>
