@@ -30,6 +30,7 @@ img {
 <link th:href="@{/signin.css}" rel="stylesheet" />
 </head>
 <body>
+	<br>
 	<a href="logout"><button id="btn1">Logout</button></a>
 	<br>
 	<br>
@@ -39,6 +40,7 @@ img {
 		<td>Public Address:</td>
 		<td><a
 			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}" th:text="${publicAddr}" target=_blank></a></td>
+		<td rowspan = "3"><img th:src="${qrImg}"></img></td>
 	</tr>
 	<tr>
 		<td>Account Number:</td>
@@ -50,7 +52,7 @@ img {
 	</tr>
 	</table> 
 
-	<img th:src="${qrImg}"></img>
+	<!-- <img th:src="${qrImg}"></img> -->
 	<br />
 	<br />
 	<br />
