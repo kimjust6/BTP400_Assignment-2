@@ -7,12 +7,35 @@ h2 {
 
 #btn {
 	font-size: 16px;
-	background-color: #FF3C3C;
+	background-color: #5FE274;
 	border-radius: 5px;
-	width: 250px;
+	width: 300px;
 	height: 40px;
 	color: white;
+	padding-bottom: 4px;
+	padding-top: 4px;
 }
+#btn0 {
+	font-size: 16px;
+	background-color: #5FE274;
+	border-radius: 5px;
+	width: 180px;
+	height: 40px;
+	color: black;
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+#btn1 {
+	font-size: 16px;
+	background-color: #D8D8D8;
+	border-radius: 5px;
+	width: 180px;
+	height: 40px;
+	color: black;
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+
 #field {
 	width: 250px;
 	height: 40px;
@@ -20,5 +43,6 @@ h2 {
 body{
 	font-family: 'Nunito', sans-serif;
 	font-size: 16pt;
-	background-color: #EAEAEA;
+	margin: auto;
+	width: 70%;
 }
