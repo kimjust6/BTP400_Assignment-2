@@ -33,6 +33,7 @@ public class MainController {
 	@GetMapping("/")
 	public String homePage(Model model) {
 		model.addAttribute("group", "Group 4");
+		accountNo = -1;
 		return "home";
 	}
 
@@ -61,7 +62,10 @@ public class MainController {
 				ResultSet queryResult = statement.executeQuery(query);
 
 				if (queryResult.next())
+				{
 					accountNo = queryResult.getInt("accno");
+				}
+					
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -71,7 +75,7 @@ public class MainController {
 		}
 
 		bank.updateBalance(accountNo);
-
+		this.bank.getPubAddress(accountNo);
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(this.bank.getPubAddress(accountNo), 250, 250);
 
 		model.addAttribute("publicAddr", this.bank.getPubAddress(accountNo));
