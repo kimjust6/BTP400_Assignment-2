@@ -86,7 +86,7 @@ public class MainController {
 	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount, RedirectAttributes redirAttrs) {
 
 		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
-//		bank.send(accountNo, sendTo, amount);
+		bank.send(accountNo, sendTo, amount);
 		
 		return "redirect:/wallet";
 	}
