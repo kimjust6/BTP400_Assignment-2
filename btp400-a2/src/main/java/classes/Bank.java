@@ -86,48 +86,29 @@ public class Bank {
 		return new Account(accountNo, account);
 	}
 
-//	double viewAccount(int accountNo) {
-//		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-//
-//		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
-//				rpc, // Kalium RPC
-//				blockProducer); // Using our BlockProducer defined above
-//
-//		
-//		System.out.printf("Using account address %s%n", account.getAccount());
-//		new Thread(() -> {
-//			try {
-//				while (true) {
-//					if (account.receiveAll().size() > 0) {
-//						System.out.printf("Received %,d blocks%n");
-//						theBalance = account.getBalance().getAsNano().doubleValue() * BAN_NAN_MULT;
-//						System.out.printf("Balance: %s%n", theBalance);
-//					}
-//					Thread.sleep(5000);
-//				}
-//
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (WalletActionException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		}).start();
-//
-//		return theBalance;
-//	}
+	public void updateBalance(int accountNo) {
+		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
+
+		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
+				rpc, // Kalium RPC
+				blockProducer); // Using our BlockProducer defined above
+
+		try {
+			account.receiveAll();
+		} catch (WalletActionException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public double getBalance(int accountNo) {
 		try {
 			HexData pkFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-			LocalRpcWalletAccount wallet = new LocalRpcWalletAccount(pkFrom, rpc, blockProducer); 
-			
+			LocalRpcWalletAccount wallet = new LocalRpcWalletAccount(pkFrom, rpc, blockProducer);
+
 			wallet.receiveAll();
-			
+
 			return wallet.getBalance().getAsNano().doubleValue() * Bank.BAN_NAN_MULT;
-			
+
 		} catch (WalletActionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,8 +124,7 @@ public class Bank {
 	public static void main(String args[]) throws WalletActionException, OpenCLInitializerException {
 		// System.out.println("Nice");
 		Bank b = new Bank();
-		
-		
+
 //		b.viewAccount(0);
 		// b.send(1, 0, 3);
 
