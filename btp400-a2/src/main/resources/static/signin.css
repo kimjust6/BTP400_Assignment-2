@@ -35,7 +35,16 @@ h2 {
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
-
+#btn2 {
+	font-size: 16px;
+	background-color: #007bff;
+	border-radius: 5px;
+	width: 180px;
+	height: 40px;
+	color: white;
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
 #field {
 	width: 250px;
 	height: 40px;
