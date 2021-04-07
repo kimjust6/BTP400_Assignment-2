@@ -123,13 +123,13 @@ public class Bank {
 		return NanoAccount.fromPrivateKey(WalletUtil.deriveKeyFromSeed(seed, accountNo), prefix).toString();
 	}
 
-	public static void main(String args[]) throws WalletActionException, OpenCLInitializerException {
-		// System.out.println("Nice");
-		Bank b = new Bank();
-
+//	public static void main(String args[]) throws WalletActionException, OpenCLInitializerException {
+//		System.out.println("Nice");
+//		Bank b = new Bank();
+//
 //		b.viewAccount(0);
-		// b.send(1, 0, 3);
-
-	}
+//		b.send(1, 0, 3);
+//
+//	}
 
 }
