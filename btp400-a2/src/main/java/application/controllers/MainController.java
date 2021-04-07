@@ -11,7 +11,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import QRCode.QRCodeGenerator;
 import classes.Account;
@@ -27,7 +34,7 @@ public class MainController {
 	}
 
 	// could potentially improve this solution
-	@GetMapping(path = "/wallet")
+	@RequestMapping(path = "/wallet", method = RequestMethod.GET)
 	public String walletInfo(Model model) throws Exception {
 		Bank aBank = new Bank();
 
@@ -65,8 +72,21 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return "wallet";
 	}
+	@RequestMapping(value = "/sendMoney", method = RequestMethod.POST)
+    public void handleSend(Bank bank, Model model) {
+        
+        int currentAcc= 0;
+        int toAcc = 0;
+        double amount = 0.0;
+        model.addAttribute("amount", amount);
+        model.addAttribute("accno", toAcc);
+        //bank.send(currentAcc, toAcc, amount);
+        
+        System.out.println(amount + " --> " + toAcc);
+        
+    }
 
 }

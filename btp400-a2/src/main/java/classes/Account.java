@@ -8,7 +8,7 @@ public class Account {
 	private int accountNo;
 	private LocalRpcWalletAccount wallet;
 
-	Account() {
+	public Account() {
 		accountNo = -1;
 		wallet = null;
 	}

@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:form="http://www.springframework.org/tags/form">
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
@@ -22,5 +23,24 @@
 		Balance: <span th:text="${balAmt}"></span>
 	</div>
 	<img th:src="${qrImg}"></img>
+	
+	<br/>
+	<div>
+	<h2>Send Money</h2>
+		<form action="/sendMoney" method="post">
+		<table>
+			<tr>
+				<td>Amount: <input type="text" name="amount" /></td>
+			</tr>
+			<tr>
+				<td>Client Account: <input type="text" name="accno" /></td>
+			</tr>
+
+			<tr>
+				<td><form:input type="submit" value="Send" /></td>
+			</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>
