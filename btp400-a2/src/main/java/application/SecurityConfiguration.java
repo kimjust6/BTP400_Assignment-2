@@ -34,8 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/wallet", "/sendMoney", "/sentMoney")
-				.hasAnyAuthority("USER").antMatchers("/**").permitAll().anyRequest().authenticated()
-				.and().formLogin().permitAll().and().logout().permitAll().logoutSuccessUrl("/");
+				.hasAnyAuthority("USER").antMatchers("/**").permitAll().anyRequest().authenticated().and().formLogin()
+				.permitAll().and().logout().permitAll().logoutSuccessUrl("/");
 
 	}
 
