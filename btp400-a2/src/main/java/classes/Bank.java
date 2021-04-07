@@ -7,7 +7,6 @@ import uk.oczadly.karl.jnano.model.HexData;
 import uk.oczadly.karl.jnano.model.NanoAccount;
 import uk.oczadly.karl.jnano.model.NanoAmount;
 import uk.oczadly.karl.jnano.rpc.RpcQueryNode;
-import uk.oczadly.karl.jnano.rpc.util.RpcServiceProviders;
 import uk.oczadly.karl.jnano.rpc.util.wallet.LocalRpcWalletAccount;
 import uk.oczadly.karl.jnano.rpc.util.wallet.WalletActionException;
 import uk.oczadly.karl.jnano.util.WalletUtil;
@@ -29,23 +28,28 @@ public class Bank {
 	BlockProducer blockProducer;
 
 	double theBalance = -1;
+	
 
 	public Bank() {
-		try {
-			blockProducer = new StateBlockProducer(BlockProducerSpecification.builder().defaultRepresentative(rep)
-					.workGenerator(new OpenCLWorkGenerator()) // Local work on gpu
-					.addressPrefix(prefix).build());
-		} catch (OpenCLInitializerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		try {
 			rpc = new RpcQueryNode(new URL(node));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			
+			blockProducer = new StateBlockProducer(BlockProducerSpecification.builder().defaultRepresentative(rep)
+					.workGenerator(new OpenCLWorkGenerator()) // Local work on gpu
+//					.workGenerator(new NodeWorkGenerator(rpc))
+					.addressPrefix(prefix).build());
+		} catch (OpenCLInitializerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 	}
 
 	// amount you want to send and the account number you want to send to
