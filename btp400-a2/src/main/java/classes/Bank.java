@@ -49,7 +49,7 @@ public class Bank {
 	}
 
 	// amount you want to send and the account number you want to send to
-	boolean send(int fromAccountNo, int toAccountNo, double amount) {
+	public boolean send(int fromAccountNo, int toAccountNo, double amount) {
 
 		HexData pkFrom = WalletUtil.deriveKeyFromSeed(seed, fromAccountNo);
 		HexData pkTo = WalletUtil.deriveKeyFromSeed(seed, toAccountNo);
