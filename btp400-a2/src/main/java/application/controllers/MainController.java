@@ -32,7 +32,6 @@ public class MainController {
 		return "home";
 	}
 
-	// could potentially improve this solution
 	@RequestMapping(path = "/wallet", method = RequestMethod.GET)
 	public String walletInfo(Model model) throws Exception {
 
@@ -81,20 +80,22 @@ public class MainController {
 
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
 	public String send(Model model) {
-
 		model.addAttribute("balAmt", this.bank.getBalance(accountNo));
-
 		return "send";
 	}
 
 	@RequestMapping(value = "/send", method = RequestMethod.POST)
 	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount,
 			RedirectAttributes redirAttrs) {
-
-//		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
 		bank.send(accountNo, sendTo, amount);
-
 		return "redirect:/wallet";
+	}
+
+	@RequestMapping(value = "/history", method = RequestMethod.GET)
+	public String viewHistory(Model model) {
+
+//		model.addAttribute("key", value);
+		return "history";
 	}
 
 }
