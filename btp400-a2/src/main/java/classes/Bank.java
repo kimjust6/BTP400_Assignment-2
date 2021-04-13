@@ -11,7 +11,6 @@ import uk.oczadly.karl.jnano.model.NanoAmount;
 import uk.oczadly.karl.jnano.rpc.RpcQueryNode;
 import uk.oczadly.karl.jnano.rpc.exception.RpcException;
 import uk.oczadly.karl.jnano.rpc.request.node.RequestAccountHistory;
-import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory;
 import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory.BlockInfo;
 import uk.oczadly.karl.jnano.rpc.util.wallet.LocalRpcWalletAccount;
 import uk.oczadly.karl.jnano.rpc.util.wallet.WalletActionException;
@@ -22,13 +21,8 @@ import uk.oczadly.karl.jnano.util.blockproducer.StateBlockProducer;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator.OpenCLInitializerException;
 
-
-
 public class Bank {
-	
-	
-	
-	
+
 //	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
 	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
 	static final double BAN_NAN_MULT = 10;
@@ -39,20 +33,17 @@ public class Bank {
 	final String prefix = "ban";
 	BlockProducer blockProducer;
 
-
-	
 	double theBalance = -1;
-
 
 	public Bank() {
 		try {
-			
+
 			rpc = new RpcQueryNode(new URL(node));
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 
 		try {
 
@@ -94,13 +85,13 @@ public class Bank {
 		return false;
 	}
 
-	public List<BlockInfo> getAccountHistory() throws IOException, RpcException
-	{
+	public List<BlockInfo> getAccountHistory() throws IOException, RpcException {
 
-			RequestAccountHistory history = new RequestAccountHistory("ban_1kkjqhqsjy1t54ufxzsyr1n9wetrut8shm9mgihauz1dh7owic1xcsyyqrq5");
-			
-			return this.rpc.processRequest(history).getHistory();
-		
+		RequestAccountHistory history = new RequestAccountHistory(
+				"ban_1kkjqhqsjy1t54ufxzsyr1n9wetrut8shm9mgihauz1dh7owic1xcsyyqrq5");
+
+		return this.rpc.processRequest(history).getHistory();
+
 	}
 //	public Account getAccount(int accountNo) throws WalletActionException {
 //		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
@@ -148,16 +139,17 @@ public class Bank {
 		return NanoAccount.fromPrivateKey(WalletUtil.deriveKeyFromSeed(seed, accountNo), prefix).toString();
 	}
 
-	public static void main(String args[]) throws WalletActionException, OpenCLInitializerException, IOException, RpcException {
+	public static void main(String args[])
+			throws WalletActionException, OpenCLInitializerException, IOException, RpcException {
 		System.out.println("Nice");
 		Bank b = new Bank();
-		
-		List<BlockInfo> aList = b.getAccountHistory(); 
-		for (int i = 0; i < aList.size(); ++i)
-		{
+
+		List<BlockInfo> aList = b.getAccountHistory();
+		for (int i = 0; i < aList.size(); ++i) {
 			BlockInfo binfo = aList.get(i);
-			
-			System.out.println( i + ": " + " "+ binfo.getType() + ": " + binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT  + " " + binfo.getTimestamp());
+
+			System.out.println(i + ": " + " " + binfo.getType() + ": "
+					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
 
 		}
 	}
