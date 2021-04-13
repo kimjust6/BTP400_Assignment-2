@@ -19,23 +19,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.jdbcAuthentication().dataSource(dataSource)
-//				.usersByUsernameQuery("select username, password, enabled from walletusers where username=?")
-//				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
-
 		auth.jdbcAuthentication().dataSource(dataSource)
 				.passwordEncoder(passwordEncoder())
 				.usersByUsernameQuery("select username, password, enabled from walletusers where username=?")
 				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
 	}
-
-	// this doesnt encode, should replace with something proper
-
-//	@SuppressWarnings("deprecation")
-//	@Bean
-//	public static NoOpPasswordEncoder passwordEncoder() {
-//		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
