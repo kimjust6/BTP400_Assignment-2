@@ -57,7 +57,7 @@ public class MainController {
 				ResultSet queryResult = statement.executeQuery(query);
 
 				if (queryResult.next()) {
-					accountNo = queryResult.getInt("accno") - 1;
+					accountNo = queryResult.getInt("accno");
 				}
 
 			} catch (SQLException e1) {
