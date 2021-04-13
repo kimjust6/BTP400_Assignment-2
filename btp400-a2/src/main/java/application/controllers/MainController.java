@@ -6,13 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,11 +56,9 @@ public class MainController {
 				String query = "select accno from walletusers where username='" + username + "';";
 				ResultSet queryResult = statement.executeQuery(query);
 
-				if (queryResult.next())
-				{
-					accountNo = queryResult.getInt("accno");
+				if (queryResult.next()) {
+					accountNo = queryResult.getInt("accno") - 1;
 				}
-					
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -86,27 +79,22 @@ public class MainController {
 		return "wallet";
 	}
 
-	@RequestMapping(value = "/reloadBalance", method = RequestMethod.GET)
-	public String sendMoney() {
-		return "redirect:/wallet";
-	}
-
-	@RequestMapping(value = "/sendMoney", method = RequestMethod.GET)
-	public String sendMoney(Model model) {
+	@RequestMapping(value = "/send", method = RequestMethod.GET)
+	public String send(Model model) {
 
 		model.addAttribute("balAmt", this.bank.getBalance(accountNo));
 
-		return "sendMoney";
+		return "send";
 	}
 
-	@RequestMapping(value = "/sentMoney", method = RequestMethod.POST)
+	@RequestMapping(value = "/send", method = RequestMethod.POST)
 	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount,
 			RedirectAttributes redirAttrs) {
 
-		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
+//		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
 		bank.send(accountNo, sendTo, amount);
 
 		return "redirect:/wallet";
 	}
-	
+
 }
