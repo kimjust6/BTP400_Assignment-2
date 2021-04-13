@@ -29,8 +29,8 @@ public class Bank {
 	
 	
 	
-//	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
-	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
+	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
+//	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
 	static final double BAN_NAN_MULT = 10;
 	final String node = "https://kaliumapi.appditto.com/api";
 	// final String node = "http://192.168.1.167:7072";
@@ -70,11 +70,11 @@ public class Bank {
 	// amount you want to send and the account number you want to send to
 	public boolean send(int fromAccountNo, int toAccountNo, double amount) {
 
-		HexData pkFrom = WalletUtil.deriveKeyFromSeed(seed, fromAccountNo);
-		HexData pkTo = WalletUtil.deriveKeyFromSeed(seed, toAccountNo);
+		HexData skFrom = WalletUtil.deriveKeyFromSeed(seed, fromAccountNo);
+		HexData skTo = WalletUtil.deriveKeyFromSeed(seed, toAccountNo);
 
 		// Create account from private key
-		LocalRpcWalletAccount account = new LocalRpcWalletAccount(pkFrom, // Private key
+		LocalRpcWalletAccount account = new LocalRpcWalletAccount(skFrom, // Secret key
 				rpc, // Kalium RPC
 				blockProducer); // Using our BlockProducer defined above
 
@@ -84,7 +84,8 @@ public class Bank {
 		// Send funds to another account
 		System.out.printf("Send block hash: %s%n", hash);
 		try {
-			hash = account.send(NanoAccount.fromPrivateKey(pkTo, prefix),
+			
+			hash = account.send(NanoAccount.fromPrivateKey(skTo, prefix),
 					NanoAmount.valueOfNano(String.valueOf(amount / BAN_NAN_MULT))).getHash();
 		} catch (WalletActionException e) {
 			// TODO Auto-generated catch block
@@ -94,11 +95,13 @@ public class Bank {
 		return false;
 	}
 
-	public List<BlockInfo> getAccountHistory() throws IOException, RpcException
+	public List<BlockInfo> getAccountHistory(int accountNo) throws IOException, RpcException
 	{
-
-			RequestAccountHistory history = new RequestAccountHistory("ban_1kkjqhqsjy1t54ufxzsyr1n9wetrut8shm9mgihauz1dh7owic1xcsyyqrq5");
-			
+//			HexData skFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
+//			System.out.println( WalletUtil.deriveKeyFromSeed(skFrom).toString());
+		
+//			RequestAccountHistory history = new RequestAccountHistory("ban_1kkjqhqsjy1t54ufxzsyr1n9wetrut8shm9mgihauz1dh7owic1xcsyyqrq5");
+		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
 			return this.rpc.processRequest(history).getHistory();
 		
 	}
@@ -129,8 +132,8 @@ public class Bank {
 
 	public double getBalance(int accountNo) {
 		try {
-			HexData pkFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-			LocalRpcWalletAccount wallet = new LocalRpcWalletAccount(pkFrom, rpc, blockProducer);
+			HexData skFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
+			LocalRpcWalletAccount wallet = new LocalRpcWalletAccount(skFrom, rpc, blockProducer);
 
 			wallet.receiveAll();
 
@@ -152,7 +155,7 @@ public class Bank {
 		System.out.println("Nice");
 		Bank b = new Bank();
 		
-		List<BlockInfo> aList = b.getAccountHistory(); 
+		List<BlockInfo> aList = b.getAccountHistory(0); 
 		for (int i = 0; i < aList.size(); ++i)
 		{
 			BlockInfo binfo = aList.get(i);
