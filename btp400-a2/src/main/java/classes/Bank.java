@@ -104,7 +104,7 @@ public class Bank {
 			returnList = this.rpc.processRequest(history).getHistory();
 		} catch (IOException | RpcException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 			return null;
 		}
 		return returnList;
@@ -160,12 +160,12 @@ public class Bank {
 		System.out.println("Nice");
 		Bank b = new Bank();
 		
-		List<BlockInfo> aList = b.getAccountHistory(10); 
+		List<BlockInfo> aList = b.getAccountHistory(0); 
 		for (int i = 0; aList != null && i < aList.size(); ++i)
 		{
 			BlockInfo binfo = aList.get(i);
-			
-			System.out.println( i + ": " + " "+ binfo.getType() + ": " + binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT  + " " + binfo.getTimestamp());
+			System.out.println(i + ": " + binfo.getHash());
+//			System.out.println( i + ": " + " "+ binfo.getType() + ": " + binfo.getAccount() + " " +binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT  + " " + binfo.getTimestamp());
 
 		}
 	}
