@@ -9,16 +9,20 @@
 <title>Wallet</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<link th:href="@{/signin.css}" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Lato"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat"
-	rel="stylesheet" type="text/css">
+<link th:href="@{/signin.css}" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito&display=swap" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+<style>
+	body{
+	font-family: 'Nunito', sans-serif;
+	font-size: 14pt;
+	}
+	
+</style>
 </head>
 <body>
 
@@ -42,7 +46,7 @@
 
 
 
-		<table class="table table-hover">
+		<table class="table table-hover table-bordered">
 			<thead>
 				<tr>
 					<th>Category</th>
@@ -68,10 +72,10 @@
 			</tbody>
 		</table>
 		<br /> <br /> <br /> <a href="send"><button type="button"
-				class="btn btn-success">Send Money</button></a> <a href="wallet"><button
-				type="button" class="btn btn-default">Refresh</button></a>
+				id="btn0">Send Money</button></a> <a href="wallet"><button
+				type="button" id="btn1">Refresh</button></a>
 	</div>
-	 
+
 
 </body>
 </html>
