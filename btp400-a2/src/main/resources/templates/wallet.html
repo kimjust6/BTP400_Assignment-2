@@ -59,9 +59,9 @@
 						<td><a
 							th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}"
 							th:text="${publicAddr}" target=_blank></a></td>
-						<td rowspan="3"><img th:src="${qrImg}"></img></td>
+						<td class="image" rowspan="3"><img th:src="${qrImg}"></img></td>
 					</tr>
-					<tr>
+					<tr >
 						<td>Account Number:</td>
 						<td><span th:text="${accNo}"></span></td>
 					</tr>
