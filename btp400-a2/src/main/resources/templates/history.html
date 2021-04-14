@@ -14,15 +14,15 @@
 	<a href="wallet"><button id="btn1">Return</button></a>
 	<br>
 	<br>
-	<table>
+	<table class="table">
 		<tr>
 			<th>Sender / Recipient</th>
 			<th>Amount</th>
 			<th>Type</th>
-			<th>Timestamp</th>
+			<th>Node Time Stamp</th>
 		</tr>
 		<tr th:each="item: ${history}">
-			<td th:text="${item.getAccount()}"></td>
+			<td ><a th:href = "@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"  th:text="${item.getAccount()}"></a></td>
 			<td th:text="${item.getAmount().getAsNano().doubleValue()}"></td>
 			<td th:text="${item.getType()}"></td>
 			<td th:text="${item.getTimestamp()}"></td>

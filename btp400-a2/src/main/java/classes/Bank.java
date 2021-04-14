@@ -156,10 +156,10 @@ public class Bank {
 		{
 
 			BlockInfo binfo = aList.get(i);
-
-
-			System.out.println(i + ": " + " " + binfo.getType() + ": "
-					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
+			
+			System.out.println( binfo.getHash().toString());
+//			System.out.println(i + ": " + " " + binfo.getType() + ": "
+//					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
 
 
 		}
