@@ -31,21 +31,21 @@ public class MainController {
 		accountNo = -1;
 		return "home";
 	}
-
+	
 	@RequestMapping(path = "/wallet", method = RequestMethod.GET)
 	public String walletInfo(Model model) throws Exception {
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+		String username = "";
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+		
 		if (accountNo == -1) {
-
-			String username;
-
-			if (principal instanceof UserDetails) {
-				username = ((UserDetails) principal).getUsername();
-			} else {
-				username = principal.toString();
-			}
 
 			try (Connection connection = DriverManager.getConnection(
 					"jdbc:postgresql://ec2-54-209-43-223.compute-1.amazonaws.com:5432/d19rc88931g1bi", "luwrnpzmqrzvln",
@@ -70,6 +70,7 @@ public class MainController {
 		this.bank.getPubAddress(accountNo);
 		String imageBase64 = QRCodeGenerator.generateQRCodeImage(this.bank.getPubAddress(accountNo), 250, 250);
 
+		model.addAttribute("username", username);
 		model.addAttribute("publicAddr", this.bank.getPubAddress(accountNo));
 		model.addAttribute("accNo", accountNo);
 		model.addAttribute("balAmt", this.bank.getBalance(accountNo));

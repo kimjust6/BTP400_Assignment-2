@@ -11,32 +11,32 @@ img {
 
 #btn {
 	font-size: 16px;
-	background-color: #5FE274;
+	background-color: #333333;
 	border-radius: 5px;
 	width: 345px;
 	height: 40px;
-	color: black;
+	color: white;
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
 
 #btn:hover {
-	background-color: #45f561;	
+	background-color: #e0dede;	
 }
 
 #btn0 {
 	font-size: 16px;
-	background-color: #5FE274;
+	background-color: #222222;
 	border-radius: 5px;
 	width: 180px;
 	height: 40px;
-	color: black;
+	color: white;
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
 
 #btn0:hover {
-	background-color: #45f561;	
+	background-color: #333333;	
 }
 
 #btn1 {
@@ -58,6 +58,7 @@ img {
 	font-size: 16px;
 	background-color: #007bff;
 	border-radius: 5px;
+	border-color: #0275d8;
 	width: 180px;
 	height: 40px;
 	color: white;
@@ -73,6 +74,7 @@ img {
 	width: 250px;
 	height: 40px;
 }
+
 body{
 	font-family: 'Nunito', sans-serif;
 	font-size: 14pt;

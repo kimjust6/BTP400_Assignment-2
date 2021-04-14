@@ -10,7 +10,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link th:href="@{/signin.css}" rel="stylesheet" />
 
-<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito&display=swap" rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito&display=swap"
+	rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -23,8 +25,8 @@
 
 </head>
 <body>
-	<div class="container">
-		<nav class="navbar navbar-inverse">
+	<div class="container" style="width: 100%; margin: auto; padding: 0px;">
+		<nav class="navbar navbar-inverse" style="border-radius: 0px;">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="wallet">Banano</a>
@@ -40,8 +42,9 @@
 				</ul>
 			</div>
 		</nav>
-
-		<table class="table table-hover table-bordered">
+		<br>
+		<table class="table table-hover table-bordered"
+			style="width: 70%; margin: auto; padding: 0px;">
 			<thead>
 				<tr>
 					<th>Type</th>
@@ -52,16 +55,18 @@
 				</tr>
 			</thead>
 			<tbody>
-			<tr th:each="item: ${history}">
-				<td th:text="${item.getType()}"></td>
-				<td><a th:target="_blank"
-					th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
-					th:text="${item.getAccount()}"></a></td>
-				<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
-				<td th:text="${item.getTimestamp()}"></td>
-			</tr>
+				<tr th:each="item: ${history}">
+					<td th:text="${item.getType()}"></td>
+					<td><a th:target="_blank"
+						th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
+						th:text="${item.getAccount()}"></a></td>
+					<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
+					<td th:text="${item.getTimestamp()}"></td>
+				</tr>
 			</tbody>
 		</table>
+		<br>
+		<br>
 	</div>
 </body>
 </html>
