@@ -97,14 +97,7 @@ public class MainController {
 
 	@RequestMapping(value = "/history", method = RequestMethod.GET)
 	public String viewHistory(Model model) {
-
-		try {
-			model.addAttribute("history", bank.getAccountHistory(this.accountNo));
-			
-		} catch (IOException | RpcException e) {
-			e.printStackTrace();
-		}
-		
+		model.addAttribute("history", bank.getAccountHistory(this.accountNo));
 		return "history";
 	}
 

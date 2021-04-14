@@ -75,7 +75,7 @@ public class Bank {
 		// Send funds to another account
 		System.out.printf("Send block hash: %s%n", hash);
 		try {
-			
+
 			hash = account.send(NanoAccount.fromPrivateKey(skTo, prefix),
 					NanoAmount.valueOfNano(String.valueOf(amount / BAN_NAN_MULT))).getHash();
 		} catch (WalletActionException e) {
@@ -86,16 +86,19 @@ public class Bank {
 		return false;
 	}
 
-	public List<BlockInfo> getAccountHistory(int accountNo) throws IOException, RpcException
-	{
-//			HexData skFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-//			System.out.println( WalletUtil.deriveKeyFromSeed(skFrom).toString());
-		
-//			RequestAccountHistory history = new RequestAccountHistory("ban_1kkjqhqsjy1t54ufxzsyr1n9wetrut8shm9mgihauz1dh7owic1xcsyyqrq5");
+	public List<BlockInfo> getAccountHistory(int accountNo) {
+		List<BlockInfo> returnList = null;
 		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
-			return this.rpc.processRequest(history).getHistory();
-		
+		try {
+			returnList = this.rpc.processRequest(history).getHistory();
+		} catch (IOException | RpcException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return returnList;
 	}
+
 //	public Account getAccount(int accountNo) throws WalletActionException {
 //		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
 //		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
@@ -147,9 +150,9 @@ public class Bank {
 		System.out.println("Nice");
 		Bank b = new Bank();
 
-		List<BlockInfo> aList = b.getAccountHistory(0); 
-		for (int i = 0; i < aList.size(); ++i)
-		{
+		List<BlockInfo> aList = b.getAccountHistory(0);
+
+		for (int i = 0; aList != null && i < aList.size(); ++i) {
 			BlockInfo binfo = aList.get(i);
 
 			System.out.println(i + ": " + " " + binfo.getType() + ": "
