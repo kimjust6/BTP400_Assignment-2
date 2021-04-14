@@ -21,6 +21,11 @@ img {
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
+
+#btn:hover {
+	background-color: #45f561;	
+}
+
 #btn0 {
 	font-size: 16px;
 	background-color: #5FE274;
@@ -31,6 +36,11 @@ img {
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
+
+#btn0:hover {
+	background-color: #45f561;	
+}
+
 #btn1 {
 	font-size: 16px;
 	background-color: #D8D8D8;
@@ -41,6 +51,11 @@ img {
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
+
+#btn1:hover {
+	background-color: #e0dede;	
+}
+
 #btn2 {
 	font-size: 16px;
 	background-color: #007bff;
@@ -51,6 +66,11 @@ img {
 	padding-bottom: 4px;
 	padding-top: 4px;
 }
+
+#btn2:hover {
+  background-color: #248dff;
+}
+
 #field {
 	width: 250px;
 	height: 40px;

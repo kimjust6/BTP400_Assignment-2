@@ -22,11 +22,12 @@
 <link th:href="@{/signin.css}" rel="stylesheet" />
 </head>
 <body>
+	
 	<div class="container">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="wallet">MonkeyCrypto</a>
+					<a class="navbar-brand" target=_blank href="https://banano.cc/">Banano</a>
 				</div>
 				<ul class="nav navbar-nav">
 					<li><a href="wallet">Wallet</a></li>
@@ -46,18 +47,17 @@
 					<th>Type</th>
 					<th>Sender / Recipient</th>
 					<th>Amount</th>
-
-					<th>Node Time Stamp</th>
+					<th nowrap="nowrap">Node Time Stamp</th>
 				</tr>
 			</thead>
 			<tbody>
 			<tr th:each="item: ${history}">
-				<td th:text="${item.getType()}"></td>
+				<td  th:text="${item.getType()}"></td>
 				<td><a th:target="_blank"
 					th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
 					th:text="${item.getAccount()}"></a></td>
 				<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
-				<td th:text="${item.getTimestamp()}"></td>
+				<td  nowrap="nowrap" th:text="${item.getTimestamp()}"></td>
 			</tr>
 			</tbody>
 		</table>
