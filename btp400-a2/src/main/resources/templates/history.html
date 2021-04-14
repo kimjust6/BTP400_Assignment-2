@@ -16,19 +16,16 @@
 	<br>
 	<table>
 		<tr>
-			<!-- <th>#</th> -->
-			<th>Column 1</th>
-			<th>Column 2</th>
-			<th>Column 3</th>
-			<!-- <th>Column 4</th> -->
+			<th>Sender / Recipient</th>
+			<th>Amount</th>
+			<th>Type</th>
+			<th>Timestamp</th>
 		</tr>
 		<tr th:each="item: ${history}">
-			<!-- <td th:text="${item.binfo.getType()}" ></td>
-			<td th:text="${item.binfo.getAmount().getAsNano().doubleValue()}" ></td>
-			<td th:text="${item.binfo.getTimestamp()}" ></td> -->
-			<td>test1</td>
-			<td>test2</td>
-			<td>test3</td>
+			<td th:text="${item.getAccount()}"></td>
+			<td th:text="${item.getAmount().getAsNano().doubleValue()}"></td>
+			<td th:text="${item.getType()}"></td>
+			<td th:text="${item.getTimestamp()}"></td>
 		</tr>
 	</table>
 	<br>

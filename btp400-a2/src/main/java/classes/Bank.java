@@ -89,13 +89,13 @@ public class Bank {
 	public List<BlockInfo> getAccountHistory(int accountNo) {
 		List<BlockInfo> returnList = null;
 		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
+
 		try {
 			returnList = this.rpc.processRequest(history).getHistory();
 		} catch (IOException | RpcException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
+
 		return returnList;
 	}
 
@@ -147,10 +147,10 @@ public class Bank {
 
 	public static void main(String args[])
 			throws WalletActionException, OpenCLInitializerException, IOException, RpcException {
-		System.out.println("Nice");
+		
 		Bank b = new Bank();
 
-		List<BlockInfo> aList = b.getAccountHistory(0);
+		List<BlockInfo> aList = b.getAccountHistory(10);
 
 		for (int i = 0; aList != null && i < aList.size(); ++i) {
 			BlockInfo binfo = aList.get(i);
