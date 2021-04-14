@@ -4,6 +4,14 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:form="http://www.springframework.org/tags/form">
+	
+	<!-- BOOTSTRAP -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
@@ -13,17 +21,22 @@
 	<br>
 	<a href="wallet"><button id="btn1">Return</button></a>
 	<br>
+	
 	<br>
-	<table class="table">
+	<table class="table table-hover table-bordered">
+		<thead class="thead-dark">
 		<tr>
-			<th>Sender / Recipient</th>
-			<th>Amount</th>
-			<th>Type</th>
-			<th>Node Time Stamp</th>
+			<th scope="col">Sender / Recipient</th>
+			<th scope="col">Amount</th>
+			<th scope="col">Type</th>
+			<th scope="col">Node Time Stamp</th>
 		</tr>
+		</thead>
 		<tr th:each="item: ${history}">
-			<td ><a th:href = "@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"  th:text="${item.getAccount()}"></a></td>
-			<td th:text="${item.getAmount().getAsNano().doubleValue()}"></td>
+			<td><a
+				th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
+				th:text="${item.getAccount()}"></a></td>
+			<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
 			<td th:text="${item.getType()}"></td>
 			<td th:text="${item.getTimestamp()}"></td>
 		</tr>
