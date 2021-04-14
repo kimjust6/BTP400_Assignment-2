@@ -1,12 +1,10 @@
 package application.controllers;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,8 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import QRCode.QRCodeGenerator;
 import classes.Bank;
-import uk.oczadly.karl.jnano.rpc.exception.RpcException;
-import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory.BlockInfo;
 
 @Controller
 public class MainController {
