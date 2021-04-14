@@ -86,7 +86,8 @@ public class Bank {
 		return false;
 	}
 
-	public List<BlockInfo> getAccountHistory(int accountNo) {
+	public List<BlockInfo> getAccountHistory(int accountNo) 
+	{
 		List<BlockInfo> returnList = null;
 		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
 
