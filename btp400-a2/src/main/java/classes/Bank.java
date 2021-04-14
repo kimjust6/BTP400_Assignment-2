@@ -22,18 +22,9 @@ import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator.OpenCLInitializerException;
 
 public class Bank {
-<<<<<<< HEAD
 
-//	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
-	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
-=======
-	
-	
-	
-	
 	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
 //	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
->>>>>>> branch 'master' of https://github.com/hershk17/BTP400_Assignment-2.git
 	static final double BAN_NAN_MULT = 10;
 	final String node = "https://kaliumapi.appditto.com/api";
 	// final String node = "http://192.168.1.167:7072";

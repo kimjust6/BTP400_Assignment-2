@@ -99,14 +99,11 @@ public class MainController {
 	public String viewHistory(Model model) {
 
 		try {
-			List<BlockInfo> history = bank.getAccountHistory();
-			
-			System.out.println(history);
+			model.addAttribute("history", bank.getAccountHistory(this.accountNo));
 			
 		} catch (IOException | RpcException e) {
 			e.printStackTrace();
 		}
-		
 		
 		return "history";
 	}
