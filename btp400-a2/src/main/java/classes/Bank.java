@@ -3,6 +3,7 @@ package classes;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.oczadly.karl.jnano.model.HexData;
@@ -95,16 +96,20 @@ public class Bank {
 		return false;
 	}
 
-	public List<BlockInfo> getAccountHistory(int accountNo) throws IOException, RpcException
+	public List<BlockInfo> getAccountHistory(int accountNo) 
 	{
-//			HexData skFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
-//			System.out.println( WalletUtil.deriveKeyFromSeed(skFrom).toString());
-		
-//			RequestAccountHistory history = new RequestAccountHistory("ban_1kkjqhqsjy1t54ufxzsyr1n9wetrut8shm9mgihauz1dh7owic1xcsyyqrq5");
+		List<BlockInfo> returnList = null;
 		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
-			return this.rpc.processRequest(history).getHistory();
-		
+		try {
+			returnList = this.rpc.processRequest(history).getHistory();
+		} catch (IOException | RpcException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return returnList;
 	}
+	
 //	public Account getAccount(int accountNo) throws WalletActionException {
 //		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
 //		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
@@ -155,8 +160,8 @@ public class Bank {
 		System.out.println("Nice");
 		Bank b = new Bank();
 		
-		List<BlockInfo> aList = b.getAccountHistory(0); 
-		for (int i = 0; i < aList.size(); ++i)
+		List<BlockInfo> aList = b.getAccountHistory(10); 
+		for (int i = 0; aList != null && i < aList.size(); ++i)
 		{
 			BlockInfo binfo = aList.get(i);
 			
