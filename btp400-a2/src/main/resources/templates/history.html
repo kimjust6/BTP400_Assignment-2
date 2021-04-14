@@ -34,7 +34,7 @@
 		</thead>
 		<tr th:each="item: ${history}">
 			<td><a
-				th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
+				th:target="_blank" th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
 				th:text="${item.getAccount()}"></a></td>
 			<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
 			<td th:text="${item.getType()}"></td>
