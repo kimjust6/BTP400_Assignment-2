@@ -19,7 +19,7 @@
 	<tr>
 		<td>Public Address:</td>
 		<td><a
-			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}" th:text="${publicAddr}" target=_blank></a></td>
+			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}" th:target="_blank" th:text="${publicAddr}"></a></td>
 		<td rowspan = "3"><img th:src="${qrImg}"></img></td>
 	</tr>
 	<tr>
