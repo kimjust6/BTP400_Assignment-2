@@ -1,10 +1,12 @@
 package application.controllers;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import QRCode.QRCodeGenerator;
 import classes.Bank;
+import uk.oczadly.karl.jnano.rpc.exception.RpcException;
+import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory.BlockInfo;
 
 @Controller
 public class MainController {
@@ -32,7 +36,6 @@ public class MainController {
 		return "home";
 	}
 
-	// could potentially improve this solution
 	@RequestMapping(path = "/wallet", method = RequestMethod.GET)
 	public String walletInfo(Model model) throws Exception {
 
@@ -81,20 +84,21 @@ public class MainController {
 
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
 	public String send(Model model) {
-
 		model.addAttribute("balAmt", this.bank.getBalance(accountNo));
-
 		return "send";
 	}
 
 	@RequestMapping(value = "/send", method = RequestMethod.POST)
 	public String handleSend(Model model, @RequestParam int sendTo, @RequestParam double amount,
 			RedirectAttributes redirAttrs) {
-
-//		System.out.println("You sent " + (amount * 10) + " to " + sendTo);
 		bank.send(accountNo, sendTo, amount);
-
 		return "redirect:/wallet";
+	}
+
+	@RequestMapping(value = "/history", method = RequestMethod.GET)
+	public String viewHistory(Model model) {
+		model.addAttribute("history", bank.getAccountHistory(this.accountNo));
+		return "history";
 	}
 
 }

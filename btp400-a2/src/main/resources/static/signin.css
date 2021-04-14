@@ -5,6 +5,23 @@ h2 {
     font-family: 'Nunito', sans-serif;
 }
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  display:inline;
+}
+
+td, th {
+  border: 2px solid black;
+  text-align: left;
+  padding: 14px;
+  font-size: 14pt;
+}
+
+img {
+	width: 180px;
+}
+
 #btn {
 	font-size: 16px;
 	background-color: #5FE274;

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:form="http://www.springframework.org/tags/form">
+<head>
+<meta charset="UTF-8">
+<title>Wallet</title>
+<link th:href="@{/signin.css}" rel="stylesheet" />
+</head>
+<body>
+	<br>
+	<a href="wallet"><button id="btn1">Return</button></a>
+	<br>
+	<br>
+	<table>
+		<tr>
+			<th>Sender / Recipient</th>
+			<th>Amount</th>
+			<th>Type</th>
+			<th>Timestamp</th>
+		</tr>
+		<tr th:each="item: ${history}">
+			<td th:text="${item.getAccount()}"></td>
+			<td th:text="${item.getAmount().getAsNano().doubleValue()}"></td>
+			<td th:text="${item.getType()}"></td>
+			<td th:text="${item.getTimestamp()}"></td>
+		</tr>
+	</table>
+	<br>
+	<br>
+</body>
+</html>

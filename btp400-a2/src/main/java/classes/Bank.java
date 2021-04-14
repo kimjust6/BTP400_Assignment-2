@@ -3,7 +3,6 @@ package classes;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import uk.oczadly.karl.jnano.model.HexData;
@@ -12,7 +11,6 @@ import uk.oczadly.karl.jnano.model.NanoAmount;
 import uk.oczadly.karl.jnano.rpc.RpcQueryNode;
 import uk.oczadly.karl.jnano.rpc.exception.RpcException;
 import uk.oczadly.karl.jnano.rpc.request.node.RequestAccountHistory;
-import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory;
 import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory.BlockInfo;
 import uk.oczadly.karl.jnano.rpc.util.wallet.LocalRpcWalletAccount;
 import uk.oczadly.karl.jnano.rpc.util.wallet.WalletActionException;
@@ -23,13 +21,8 @@ import uk.oczadly.karl.jnano.util.blockproducer.StateBlockProducer;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator;
 import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator.OpenCLInitializerException;
 
-
-
 public class Bank {
-	
-	
-	
-	
+
 	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
 //	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
 	static final double BAN_NAN_MULT = 10;
@@ -40,20 +33,17 @@ public class Bank {
 	final String prefix = "ban";
 	BlockProducer blockProducer;
 
-
-	
 	double theBalance = -1;
-
 
 	public Bank() {
 		try {
-			
+
 			rpc = new RpcQueryNode(new URL(node));
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 
 		try {
 
@@ -85,7 +75,7 @@ public class Bank {
 		// Send funds to another account
 		System.out.printf("Send block hash: %s%n", hash);
 		try {
-			
+
 			hash = account.send(NanoAccount.fromPrivateKey(skTo, prefix),
 					NanoAmount.valueOfNano(String.valueOf(amount / BAN_NAN_MULT))).getHash();
 		} catch (WalletActionException e) {
@@ -96,20 +86,21 @@ public class Bank {
 		return false;
 	}
 
-	public List<BlockInfo> getAccountHistory(int accountNo) 
-	{
+	public List<BlockInfo> getAccountHistory(int accountNo) {
 		List<BlockInfo> returnList = null;
 		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
+
 		try {
 			returnList = this.rpc.processRequest(history).getHistory();
 		} catch (IOException | RpcException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
+
+
 			return null;
 		}
+
 		return returnList;
 	}
-	
+
 //	public Account getAccount(int accountNo) throws WalletActionException {
 //		HexData privateKey = WalletUtil.deriveKeyFromSeed(seed, accountNo);
 //		LocalRpcWalletAccount account = new LocalRpcWalletAccount(privateKey, // Private key
@@ -156,16 +147,20 @@ public class Bank {
 		return NanoAccount.fromPrivateKey(WalletUtil.deriveKeyFromSeed(seed, accountNo), prefix).toString();
 	}
 
-	public static void main(String args[]) throws WalletActionException, OpenCLInitializerException, IOException, RpcException {
-		System.out.println("Nice");
-		Bank b = new Bank();
+	public static void main(String args[])
+			throws WalletActionException, OpenCLInitializerException, IOException, RpcException {
 		
+		Bank b = new Bank();
 		List<BlockInfo> aList = b.getAccountHistory(0); 
 		for (int i = 0; aList != null && i < aList.size(); ++i)
 		{
+
 			BlockInfo binfo = aList.get(i);
-			System.out.println(i + ": " + binfo.getHash());
-//			System.out.println( i + ": " + " "+ binfo.getType() + ": " + binfo.getAccount() + " " +binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT  + " " + binfo.getTimestamp());
+
+
+			System.out.println(i + ": " + " " + binfo.getType() + ": "
+					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
+
 
 		}
 	}
