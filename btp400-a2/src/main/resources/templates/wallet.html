@@ -7,34 +7,75 @@
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link th:href="@{/signin.css}" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito&display=swap" rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+	body{
+	font-family: 'Nunito', sans-serif;
+	font-size: 14pt;
+	}
+	
+</style>
 </head>
 <body>
-	<br>
-	<a href="logout"><button id="btn1">Logout</button></a>
-	<br>
-	<br>
-	
-	<table>
-	<tr>
-		<td>Public Address:</td>
-		<td><a
-			th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}" th:text="${publicAddr}" target=_blank></a></td>
-		<td rowspan = "3"><img th:src="${qrImg}"></img></td>
-	</tr>
-	<tr>
-		<td>Account Number:</td>
-		<td><span th:text="${accNo}"></span></td>
-	</tr>
-	<tr>
-		<td>Balance:</td>
-		<td><span th:text="${balAmt}"></span></td>
-	</tr>
-	</table> 
-	<br />
-	<br />
-	<br />
-	<a href="send"><button id="btn0"> Send Money</button></a> 
-	<a href="wallet"><button id="btn1">Refresh</button></a>
+
+	<div class="container">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="wallet">MonkeyCrypto</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="wallet">Wallet</a></li>
+					<li><a href="history">History</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="logout"><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+
+
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>Category</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Public Address:</td>
+					<td><a
+						th:href="@{'https://creeper.banano.cc/explorer/account/' + ${publicAddr}}"
+						th:text="${publicAddr}" target=_blank></a></td>
+					<td rowspan="3"><img th:src="${qrImg}"></img></td>
+				</tr>
+				<tr>
+					<td>Account Number:</td>
+					<td><span th:text="${accNo}"></span></td>
+				</tr>
+				<tr>
+					<td>Balance:</td>
+					<td><span th:text="${balAmt}"></span></td>
+				</tr>
+			</tbody>
+		</table>
+		<br /> <br /> <br /> <a href="send"><button type="button"
+				id="btn0">Send Money</button></a> <a href="wallet"><button
+				type="button" id="btn1">Refresh</button></a>
+	</div>
+
+
 </body>
 </html>

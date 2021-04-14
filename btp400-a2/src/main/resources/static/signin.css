@@ -5,18 +5,7 @@ h2 {
     font-family: 'Nunito', sans-serif;
 }
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  display:inline;
-}
 
-td, th {
-  border: 2px solid black;
-  text-align: left;
-  padding: 14px;
-  font-size: 14pt;
-}
 
 img {
 	width: 180px;
@@ -69,6 +58,4 @@ img {
 body{
 	font-family: 'Nunito', sans-serif;
 	font-size: 16pt;
-	margin: auto;
-	width: 70%;
 }

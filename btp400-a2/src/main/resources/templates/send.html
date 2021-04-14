@@ -7,18 +7,50 @@
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link th:href="@{/signin.css}" rel="stylesheet" />
+<style>
+button{
+width: 280px; 
+font-size:16px
+}
+</style>
 </head>
 <body>
-	<h2>Send Money</h2>
-	Your Balance: <b th:text="${balAmt}"></b>
-	<br><br><br>
-	<form name="send" th:action="@{/send}" method="post">
-		<label>Send To: </label> <input type='text' name='sendTo' th:value="${sendTo}" id="field" /> <br> <br> 
-		<label>Amount:</label> <input type='text' name='amount' th:value="${amount}" id="field" /> <br>
-		<br> <input type="submit" value="Send" class="btn" id="btn">
-	</form>
-	<br><br>
-	<a href="wallet"><button id="btn1">Return</button></a>
+	<div class="container">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="wallet">MonkeyCrypto</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="wallet">Wallet</a></li>
+					<li><a href="history">History</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="logout"><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+		<br>
+		<br>
+		<h2>Send Money</h2>
+		Your Balance: <b th:text="${balAmt}"></b> <br>
+		<br>
+		<br>
+
+		<form name="send" th:action="@{/send}" method="post">
+			<label>Send To: </label> <input type='text' name='sendTo'
+				th:value="${sendTo}" id="field" /> <br> <br> <label>Amount:</label>
+			<input type='text' name='amount' th:value="${amount}" id="field" />
+			<br> <br> <input type="submit" value="Send" class="btn"
+				id="btn">
+		</form>
+		<br>
+		<br> <a href="wallet"><button id="btn1">Return</button></a>
+	</div>
 </body>
 </html>

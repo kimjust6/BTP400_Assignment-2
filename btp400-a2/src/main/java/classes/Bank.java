@@ -93,6 +93,8 @@ public class Bank {
 		try {
 			returnList = this.rpc.processRequest(history).getHistory();
 		} catch (IOException | RpcException e) {
+
+
 			return null;
 		}
 
@@ -149,14 +151,16 @@ public class Bank {
 			throws WalletActionException, OpenCLInitializerException, IOException, RpcException {
 		
 		Bank b = new Bank();
+		List<BlockInfo> aList = b.getAccountHistory(0); 
+		for (int i = 0; aList != null && i < aList.size(); ++i)
+		{
 
-		List<BlockInfo> aList = b.getAccountHistory(10);
-
-		for (int i = 0; aList != null && i < aList.size(); ++i) {
 			BlockInfo binfo = aList.get(i);
+			
+			System.out.println( binfo.getHash().toString());
+//			System.out.println(i + ": " + " " + binfo.getType() + ": "
+//					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
 
-			System.out.println(i + ": " + " " + binfo.getType() + ": "
-					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
 
 		}
 	}

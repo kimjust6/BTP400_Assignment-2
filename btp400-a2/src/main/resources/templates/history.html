@@ -4,31 +4,63 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:form="http://www.springframework.org/tags/form">
+
+<!-- BOOTSTRAP -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link th:href="@{/signin.css}" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito&display=swap" rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>Wallet</title>
 <link th:href="@{/signin.css}" rel="stylesheet" />
 </head>
 <body>
-	<br>
-	<a href="wallet"><button id="btn1">Return</button></a>
-	<br>
-	<br>
-	<table>
-		<tr>
-			<th>Sender / Recipient</th>
-			<th>Amount</th>
-			<th>Type</th>
-			<th>Timestamp</th>
-		</tr>
-		<tr th:each="item: ${history}">
-			<td th:text="${item.getAccount()}"></td>
-			<td th:text="${item.getAmount().getAsNano().doubleValue()}"></td>
-			<td th:text="${item.getType()}"></td>
-			<td th:text="${item.getTimestamp()}"></td>
-		</tr>
-	</table>
-	<br>
-	<br>
+	<div class="container">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="wallet">MonkeyCrypto</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a href="wallet">Wallet</a></li>
+					<li class="active"><a href="history">History</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="logout"><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Sender / Recipient</th>
+					<th>Amount</th>
+
+					<th>Node Time Stamp</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr th:each="item: ${history}">
+				<td th:text="${item.getType()}"></td>
+				<td><a th:target="_blank"
+					th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
+					th:text="${item.getAccount()}"></a></td>
+				<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
+				<td th:text="${item.getTimestamp()}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
