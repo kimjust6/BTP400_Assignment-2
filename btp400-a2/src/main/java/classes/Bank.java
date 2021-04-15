@@ -92,7 +92,7 @@ public class Bank {
 	public List<BlockInfo> getAccountHistory(int accountNo) 
 	{
 		List<BlockInfo> returnList = null;
-		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo));
+		RequestAccountHistory history = new RequestAccountHistory(getPubAddress(accountNo),17);
 
 		try {
 			returnList = this.rpc.processRequest(history).getHistory();
