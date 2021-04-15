@@ -14,6 +14,7 @@ import uk.oczadly.karl.jnano.rpc.request.node.RequestAccountHistory;
 import uk.oczadly.karl.jnano.rpc.response.ResponseAccountHistory.BlockInfo;
 import uk.oczadly.karl.jnano.rpc.util.wallet.LocalRpcWalletAccount;
 import uk.oczadly.karl.jnano.rpc.util.wallet.WalletActionException;
+import uk.oczadly.karl.jnano.util.NetworkConstants;
 import uk.oczadly.karl.jnano.util.WalletUtil;
 import uk.oczadly.karl.jnano.util.blockproducer.BlockProducer;
 import uk.oczadly.karl.jnano.util.blockproducer.BlockProducerSpecification;
@@ -48,7 +49,7 @@ public class Bank {
 		try {
 
 			blockProducer = new StateBlockProducer(BlockProducerSpecification.builder().defaultRepresentative(rep)
-					.workGenerator(new OpenCLWorkGenerator()) // Local work on gpu
+					.workGenerator(new OpenCLWorkGenerator(0,0,NetworkConstants.BANANO.getWorkDifficulties())) // Local work on gpu
 //					.workGenerator(new NodeWorkGenerator(rpc))
 					.addressPrefix(prefix).build());
 		} catch (OpenCLInitializerException e) {
@@ -57,7 +58,7 @@ public class Bank {
 		}
 
 	}
-
+	
 	// amount you want to send and the account number you want to send to
 	public boolean send(int fromAccountNo, int toAccountNo, double amount) {
 
