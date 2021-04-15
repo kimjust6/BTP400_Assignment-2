@@ -60,7 +60,7 @@
 					<td><a th:target="_blank"
 						th:href="@{https://creeper.banano.cc/explorer/block/__${item.getHash()}__}"
 						th:text="${item.getAccount()}"></a></td>
-					<td th:text="${item.getAmount().getAsNano().doubleValue()*10}"></td>
+					<td id="right"><span th:text="${#numbers.formatDecimal(item.getAmount().getAs(UNIT_BAN), 1,2)}"></span> <span style="color:#f0ad4e;">BAN</span></td>
 					<td th:text="${item.getTimestamp()}"></td>
 				</tr>
 			</tbody>
