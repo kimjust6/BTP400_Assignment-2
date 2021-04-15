@@ -1,6 +1,7 @@
 package classes;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -24,6 +25,7 @@ import uk.oczadly.karl.jnano.util.workgen.OpenCLWorkGenerator.OpenCLInitializerE
 
 public class Bank {
 
+	public static final NanoAmount.Denomination UNIT_BAN = new NanoAmount.DenominationImpl("Banano", 29);
 	static HexData seed = new HexData("991A38BED0D022D6622E9AD47513E2A14AC0DA58F15D8AFC81075DEC11CAF29D");
 //	static HexData seed = new HexData("8178C293072C204532F8A7A798A53DF9636ADAB45F65A6850CA3FBA6775AC721");
 	static final double BAN_NAN_MULT = 10;
@@ -128,21 +130,21 @@ public class Bank {
 		}
 	}
 
-	public double getBalance(int accountNo) {
+	public BigDecimal getBalance(int accountNo) {
 		try {
 			HexData skFrom = WalletUtil.deriveKeyFromSeed(seed, accountNo);
 			LocalRpcWalletAccount wallet = new LocalRpcWalletAccount(skFrom, rpc, blockProducer);
 
 			wallet.receiveAll();
 
-			return wallet.getBalance().getAsNano().doubleValue() * Bank.BAN_NAN_MULT;
+			return wallet.getBalance().getAs(Bank.UNIT_BAN);
 
 		} catch (WalletActionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return -1;
+		return new BigDecimal(-1);
 	}
 
 	public String getPubAddress(int accountNo) {
@@ -161,7 +163,7 @@ public class Bank {
 			
 			System.out.println( binfo.getHash().toString());
 //			System.out.println(i + ": " + " " + binfo.getType() + ": "
-//					+ binfo.getAmount().getAsNano().doubleValue() * Bank.BAN_NAN_MULT + " " + binfo.getTimestamp());
+//					+ binfo.getAmount().getAs(Bank.UNIT_BAN) + " " + binfo.getTimestamp());
 
 
 		}

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import QRCode.QRCodeGenerator;
 import classes.Bank;
+import uk.oczadly.karl.jnano.model.NanoAmount;
 
 @Controller
 public class MainController {
@@ -94,6 +95,7 @@ public class MainController {
 
 	@RequestMapping(value = "/history", method = RequestMethod.GET)
 	public String viewHistory(Model model) {
+		model.addAttribute("UNIT_BAN", Bank.UNIT_BAN);
 		model.addAttribute("history", bank.getAccountHistory(this.accountNo));
 		return "history";
 	}
