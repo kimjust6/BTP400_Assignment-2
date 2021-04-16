@@ -26,11 +26,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource datasource) {
-		return new NamedParameterJdbcTemplate(dataSource);
-	}
-
-	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
