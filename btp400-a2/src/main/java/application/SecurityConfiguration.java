@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +23,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
 				.usersByUsernameQuery("select username, password, enabled from walletusers where username=?")
 				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
+	}
+
+	@Bean
+	public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource datasource) {
+		return new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	@Bean
