@@ -1,4 +1,4 @@
-# Springboot Cryptocurrency Banking Application that uses Banano (Nano Fork)
+# Spring Boot Cryptocurrency Banking Application Using Banano (Nano Fork)
 
 This application is a proof of concept application that uses blockchain tech to transact and store value between bank accounts.
 The application uses thymeleaf (Spring Boot framework) on the front end, Java on the backend, and postgreSQL to store user information.
